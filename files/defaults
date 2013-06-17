@@ -1,0 +1,3 @@
+ENABLED=1
+FILES="/etc/stunnel/*.conf"
+OPTIONS=""

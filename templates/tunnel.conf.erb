@@ -1,0 +1,19 @@
+sslVersion = SSLv3
+client = no
+<%- if defined? @ca -%>
+CApath = /etc/ssl/certs/<%= @ca %>.pem
+<%- end -%>
+cert = /etc/ssl/certs/<%= @ssl %>.pem
+key = /etc/ssl/private/<%= @ssl %>.key
+setuid = <%= scope['stunnel::params::owner'] %>
+setgid = <%= scope['stunnel::params::group'] %>
+pid = <%= scope['stunnel::params::pids'] %>/<%= @title %>.pid
+
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+output = <%= scope['stunnel::params::logs'] %>/<%= @title %>.log
+
+[<%= @title %>]
+accept = <%= @accept %>
+connect = <%= @connect %>

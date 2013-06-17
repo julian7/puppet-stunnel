@@ -1,0 +1,14 @@
+# postrotate script was: /etc/init.d/stunnel4 reopen-logs > /dev/null
+/var/log/stunnel4/*.log {
+	daily
+	missingok
+	rotate 356
+	compress
+	delaycompress
+	notifempty
+	create 640 stunnel4 stunnel4
+	sharedscripts
+	postrotate
+		/etc/init.d/stunnel4 restart > /dev/null
+	endscript
+}
