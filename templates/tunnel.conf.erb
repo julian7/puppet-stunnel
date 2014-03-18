@@ -17,3 +17,12 @@ output = <%= scope['stunnel::params::logs'] %>/<%= @title %>.log
 [<%= @title %>]
 accept = <%= @accept %>
 connect = <%= @connect %>
+<%- if defined? @sni -%>
+<%- @sni.each do |host, connect| %>
+[<%= host %>]
+sni = <%= @title %>:<%= host %>
+cert = /etc/ssl/certs/<%= host %>.pem
+key = /etc/ssl/private/<%= host %>.key
+connect = <%= connect %>
+<% end -%>
+<%- end -%>

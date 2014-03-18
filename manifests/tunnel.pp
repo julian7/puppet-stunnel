@@ -3,7 +3,8 @@ define stunnel::tunnel(
   $ca = undef,
   $ssl,
   $accept,
-  $connect
+  $connect,
+  $sni = undef
 ) {
   include stunnel::params
   file {"${stunnel::params::conf}/${title}.conf":
