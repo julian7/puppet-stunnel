@@ -18,7 +18,8 @@ describe 'stunnel::tunnel' do
       group: 'root',
       notify: 'Class[Stunnel::Service]',
       content: <<-SAMPLETUN
-sslVersion = SSLv3
+sslVersion = all
+options = NO_SSLv2
 client = no
 CApath = /etc/ssl/certs/ca-root.pem
 cert = /etc/ssl/certs/keyname.pem

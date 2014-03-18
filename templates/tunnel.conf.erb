@@ -1,4 +1,5 @@
-sslVersion = SSLv3
+sslVersion = all
+options = NO_SSLv2
 client = no
 <%- if defined? @ca -%>
 CApath = /etc/ssl/certs/<%= @ca %>.pem
