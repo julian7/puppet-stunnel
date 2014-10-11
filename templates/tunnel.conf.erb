@@ -1,8 +1,8 @@
 sslVersion = all
 options = NO_SSLv2
 client = no
-<%- if defined? @ca -%>
-CApath = /etc/ssl/certs/<%= @ca %>.pem
+<%- if @ca %>
+CApath = /etc/ssl/certs/<%= @ssl %>-ca.pem
 <%- end -%>
 cert = /etc/ssl/certs/<%= @ssl %>.pem
 key = /etc/ssl/private/<%= @ssl %>.key
@@ -22,8 +22,10 @@ connect = <%= @connect %>
 <%- @sni.each do |host, connect| %>
 [<%= host %>]
 sni = <%= @title %>:<%= host %>
+<%- if !@wildcard -%>
 cert = /etc/ssl/certs/<%= host %>.pem
 key = /etc/ssl/private/<%= host %>.key
+<%- end -%>
 connect = <%= connect %>
 <% end -%>
 <%- end -%>

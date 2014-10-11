@@ -1,7 +1,8 @@
 define stunnel::tunnel(
   $ensure,
-  $ca = undef,
+  $ca = false,
   $ssl,
+  $wildcard = false,
   $accept,
   $connect,
   $sni = undef
