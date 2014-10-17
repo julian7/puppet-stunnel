@@ -1,27 +1,39 @@
-# amavisd-new puppet module
+# stunnel puppet module
 
 This module targets Ubuntu (12.04 onwards) Postfix setups.
 
 ## Usage
 
-class {amavisd: ensure => 'latest'}
-class {amavisd::files:}
+```ruby
+class {stunnel: ensure => 'present'}
+class {stunnel::tunnel:
+  ensure   => 'present',
+  ssl      => 'cert bundle',
+  wildcard => true,
+  accept   => "ip:port",
+  connect  => "ip:port",
+  sni      => {
+    "SNI.domain" => "connect ip:port"
+  }
+}
+```
 
-### amavisd class options
+### stunnel class options
 
-* ensure: absent / present / latest
+* ensure: absent / present (default) / latest
 
-### amavisd::files class options
+### stunnel::tunnel class options
 
-* database options
-** dbistr: DBI connect string (like: "mysql:database=databasename;host=hostname;port=3306")
-** dbuser: database username
-** dbpass: database password
-** domains\_table: which table contains domain info (default: domains)
-** domains\_domain: which column contains domain name in domains table (default: domain)
-* Spam / AV filter options:
-** virus\_checking: true uses ClamAV (default: false)
-** spam\_checking: true uses spamassassin (default: false)
+* ensure: absent / present (default)
+* ssl: Certificate bundle / key base name (without `.pem` extension) inside
+  `/etc/ssl/certs` and `/etc/ssl/private`, respectively
+* wildcard: true / false: true if the cert bundle is appropriate to
+  every SNI domain (wildcard certificate, or alternative names have been
+  added)
+* accept: IP and port where TLS connections are accepted
+* connect: IP and port where cleartext connections are forwarded to
+* sni: host name - connect IP pairs to redefine connect entries for
+  different host names.
 
 ## Copyright
 
