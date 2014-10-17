@@ -1,9 +1,6 @@
 sslVersion = all
 options = NO_SSLv2
 client = no
-<%- if @ca %>
-CApath = /etc/ssl/certs/<%= @ssl %>-ca.pem
-<%- end -%>
 cert = /etc/ssl/certs/<%= @ssl %>.pem
 key = /etc/ssl/private/<%= @ssl %>.key
 setuid = <%= scope['stunnel::params::owner'] %>
